@@ -17,10 +17,11 @@ var state = MOVE
 var velocity = Vector2.ZERO
 var roll_vector = Vector2.DOWN
 var stats = PlayerStats
-
+var input_vector = Vector2.ZERO
 
 puppet var slave_position = Vector2() 
 puppet var slave_frame = 1
+puppet var slave_input_vector = Vector2.ZERO
 #puppet var slave_input_vector = Vector2()
 var playerID = ""
 
@@ -33,38 +34,51 @@ onready var blinkAnimationPlayer = $BlinkAnimationPlayer
 onready var sprite = $Sprite
 	
 func _ready():
-	if is_network_master():
-		animationTree.active = true
+	#if is_network_master():
+	animationTree.active = true
 	
 	slave_position = position
-	slave_frame = sprite.frame
-	
+	#slave_frame = sprite.frame
+	#slave_input_vector = input_vector
 	randomize()
 	stats.connect("no_health", self, "queue_free")
 	swordHitbox.knockback_vector = roll_vector
 
 func _physics_process(delta):
-	if is_network_master():
-		match state:
-				MOVE:
-					move_state(delta)
-				ROLL:
-					roll_state()
-				ATTACK:
-					attack_state()
+	#if is_network_master():
+	match state:
+			MOVE:
+				move_state(delta)
+			ROLL:
+				roll_state()
+			ATTACK:
+				attack_state()
+				
 		
-		rset_unreliable("slave_frame", sprite.frame)
+		#rset_unreliable("slave_frame", sprite.frame)
+	if is_network_master():
 		rset_unreliable("slave_position", position)
+		#rset_unreliable("slave_input_vector", input_vector)
+		
+		
 	else:
 		position = slave_position
-		sprite.frame = slave_frame
+		#input_vector = slave_input_vector
+		#sprite.frame = slave_frame
 	
 
 
 func move_state(delta):
-	var input_vector = Vector2.ZERO
-	input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
-	input_vector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
+	
+	if is_network_master():
+		slave_input_vector = Vector2.ZERO
+		input_vector = Vector2.ZERO
+		input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
+		input_vector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
+		rset("slave_input_vector", input_vector)
+	else:
+		input_vector = slave_input_vector
+		
 	input_vector = input_vector.normalized()
 	#rset_unreliable("slave_input_vector", input_vector)
 	
@@ -76,30 +90,50 @@ func move_state(delta):
 		animationTree.set("parameters/Attack/blend_position", input_vector)
 		animationTree.set("parameters/Roll/blend_position", input_vector)
 		animationState.travel("Run")
+		#rpc_unreliable("puppet_animation", "Run")
 		velocity = velocity.move_toward(input_vector * MAX_SPEED, ACCELERATION * delta)
 
 
 	else:
 		animationState.travel("Idle")
+		#rpc_unreliable("puppet_animation", "Idle")
 		velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
+
 		
 	move()
 	
-	if Input.is_action_just_pressed("roll"):
-		state = ROLL
+	if is_network_master():
+		if Input.is_action_just_pressed("roll"):
+			state = ROLL
+			rpc_unreliable("puppet_is_action_just_pressed", ROLL)
 	
-	if Input.is_action_just_pressed("attack"):
-		state = ATTACK
+		if Input.is_action_just_pressed("attack"):
+			state = ATTACK
+			rpc_unreliable("puppet_is_action_just_pressed", ATTACK)
+
+remote func puppet_is_action_just_pressed(state_transition):
+	if not is_network_master():
+		state = state_transition
+
 
 func roll_state():
 	velocity = roll_vector * ROLL_SPEED
 	animationState.travel("Roll")
-	move()
+	#rpc_unreliable("puppet_animation", "Roll")
+	move()	
 
 func attack_state():
 	velocity = Vector2.ZERO
 	animationState.travel("Attack")
+	#rpc_unreliable("puppet_animation", "Attack")
+	#puppet_animation("Attack")
 	
+		
+#remote func puppet_animation(animation_type):
+#	if not is_network_master():
+#		animationState.travel(animation_type)
+		
+
 func move():
 	velocity = move_and_slide(velocity)
 	

@@ -103,7 +103,7 @@ func _on_Stats_no_health():
 	get_parent().add_child(enemyDeathEffect)
 	enemyDeathEffect.global_position = global_position
 	
-	3
+	3	
 
 
 func _on_Hurtbox_invincibility_started():

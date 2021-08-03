@@ -1,12 +1,12 @@
 extends Node2D
 
-
 var players = {}
 
 
 func _ready():
 	get_tree().connect("network_peer_connected", self, "_player_connected")
 	get_tree().connect("connected_to_server", self, "_connected_to_server_ok")
+	#game_setup()
 
 func _player_connected(id): #when someone else connects, I will register the player into my player list dictionary
 	print("Hello other players. I just connected and I wont see this message!: ", id)
