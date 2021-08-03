@@ -43,9 +43,9 @@ __meta__ = {
 
 [node name="IP_enter" type="LineEdit" parent="."]
 margin_left = 82.3636
-margin_top = 45.0
+margin_top = 43.9989
 margin_right = 279.364
-margin_bottom = 69.0
+margin_bottom = 67.9989
 text = "127.0.0.1"
 align = 1
 __meta__ = {
