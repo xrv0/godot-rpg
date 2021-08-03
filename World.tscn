@@ -1,7 +1,7 @@
-[gd_scene load_steps=67 format=2]
+[gd_scene load_steps=68 format=2]
 
 [ext_resource path="res://World/Bush.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://World.gd" type="Script" id=2]
 [ext_resource path="res://World/GrassBackground.png" type="Texture" id=3]
 [ext_resource path="res://World/DirtTileset.png" type="Texture" id=4]
 [ext_resource path="res://World/CliffTileset.png" type="Texture" id=5]
@@ -10,6 +10,7 @@
 [ext_resource path="res://World/Tree.tscn" type="PackedScene" id=8]
 [ext_resource path="res://UI/HealthUI.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Camera2D.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Multiplayer/START GAME!.tscn" type="PackedScene" id=11]
 
 [sub_resource type="TileSet" id=1]
 0/name = "DirtTileset.png 0"
@@ -549,6 +550,7 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 0/z_index = 0
 
 [node name="World" type="Node2D"]
+script = ExtResource( 2 )
 
 [node name="Background" type="Sprite" parent="."]
 position = Vector2( 152, 96 )
@@ -580,12 +582,6 @@ position = Vector2( -544, -344 )
 position = Vector2( 856, 536 )
 
 [node name="YSort" type="YSort" parent="."]
-
-[node name="Player" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( 160, 88 )
-
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="YSort/Player"]
-remote_path = NodePath("../../../Camera2D")
 
 [node name="Bushes" type="YSort" parent="YSort"]
 
@@ -1132,5 +1128,13 @@ position = Vector2( -248, 8 )
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="HealthUI" parent="CanvasLayer" instance=ExtResource( 9 )]
+
+[node name="START GAME!" parent="CanvasLayer" instance=ExtResource( 11 )]
+margin_left = 6.31498
+margin_top = 138.0
+margin_right = 154.315
+margin_bottom = 113.08
+
+[connection signal="pressed" from="CanvasLayer/START GAME!" to="." method="game_setup"]
 
 [editable path="Camera2D"]
