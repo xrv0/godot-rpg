@@ -39,7 +39,7 @@ func load_players():
 		var player_instance = load("res://Player/Player.tscn").instance()	#dont forget to add yourself  server guy!
 		player_instance.set_name(str(1))
 		player_instance.set_network_master(1)
-		get_node("/root").add_child(player_instance)
+		get_node("/root/World/YSort").add_child(player_instance)
 		player_instance.playerID = str(1)
 			
 	#Next evey player will spawn every other player including the server's own client! Try to move this to server only 
@@ -47,7 +47,7 @@ func load_players():
 			var player_instance = load("res://Player/Player.tscn").instance()	
 			player_instance.set_name(str(peer_id))			
 			player_instance.set_network_master(peer_id)
-			get_node("/root").add_child(player_instance)
+			get_node("/root/World/YSort").add_child(player_instance)
 			player_instance.playerID = str(peer_id) 
 	
 func _player_connected(id): #when someone else connects, I will register the player into my player list dictionary

@@ -101,7 +101,6 @@ func move_state(delta):
 
 		
 	move()
-	
 	if is_network_master():
 		if Input.is_action_just_pressed("roll"):
 			state = ROLL

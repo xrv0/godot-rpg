@@ -1,12 +1,15 @@
 extends Node2D
 
+
+
 var players = {}
 
 
 func _ready():
+	if not MultiplayerHandler.is_host:
+		$"CanvasLayer/START GAME!".hide()
 	get_tree().connect("network_peer_connected", self, "_player_connected")
 	get_tree().connect("connected_to_server", self, "_connected_to_server_ok")
-	#game_setup()
 
 func _player_connected(id): #when someone else connects, I will register the player into my player list dictionary
 	print("Hello other players. I just connected and I wont see this message!: ", id)
@@ -46,11 +49,16 @@ func update_player_list_local(): #when updatelist button is pressed
 #			for x in players:
 #				print(x)
 
-func game_setup(): #this will setup every player instance for every player
+	
+remote func game_setup(): #this will setup every player instance for every player
+	if MultiplayerHandler.is_host:
+		print("Host hats bekommen")
+		rpc("game_setup")
+	print("Wow2")
 	$"CanvasLayer/START GAME!".hide()
 	#first the host will setup the game on their end
-	if get_tree().is_network_server(): 	
-#		for peer_id in players:                                          
+	if get_tree().is_network_server():
+#		yfor peer_id in players:                                          
 #			var player_instance = load("res://Player.tscn").instance()	
 #			player_instance.set_name(str(peer_id))
 #			player_instance.set_network_master(peer_id)
@@ -68,4 +76,6 @@ func game_setup(): #this will setup every player instance for every player
 			player_instance.set_name(str(peer_id))			
 			player_instance.set_network_master(peer_id)
 			get_node("/root/World/YSort").add_child(player_instance)
-			player_instance.playerID = str(peer_id) 
+			player_instance.playerID = str(peer_id)
+			
+
