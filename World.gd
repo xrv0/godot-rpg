@@ -67,5 +67,5 @@ func game_setup(): #this will setup every player instance for every player
 			var player_instance = load("res://Player/Player.tscn").instance()	
 			player_instance.set_name(str(peer_id))			
 			player_instance.set_network_master(peer_id)
-			get_node("/root").add_child(player_instance)
+			get_node("/root/World/YSort").add_child(player_instance)
 			player_instance.playerID = str(peer_id) 
