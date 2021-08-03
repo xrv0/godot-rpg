@@ -17,6 +17,8 @@ func host_server():
 	#checks:
 	print("Hosting...This is my ID: ", str(get_tree().get_network_unique_id()))
 	load_lobby()
+	MultiplayerHandler.is_host = true
+	
 	#load_players()
 
 func join_server():
@@ -27,6 +29,7 @@ func join_server():
 	print("Joining...This is my ID: ", str(get_tree().get_network_unique_id())) 
 	load_lobby()
 	#load_players()
+	MultiplayerHandler.is_host = false
 	
 func load_lobby():
 	get_tree().change_scene("res://World.tscn")
