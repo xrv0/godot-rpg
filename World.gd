@@ -59,7 +59,7 @@ func game_setup(): #this will setup every player instance for every player
 		var player_instance = load("res://Player/Player.tscn").instance()	#dont forget to add yourself  server guy!
 		player_instance.set_name(str(1))
 		player_instance.set_network_master(1)
-		get_node("/root").add_child(player_instance)
+		get_node("/root/World/YSort").add_child(player_instance)
 		player_instance.playerID = str(1)
 			
 	#Next evey player will spawn every other player including the server's own client! Try to move this to server only 
