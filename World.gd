@@ -32,7 +32,7 @@ remote func register_player(id):
 	print("Everyone sees this.. adding this id to your array! ", id) # everyone sees this
 	#the server will see this... better tell this guy who else is already in...
 	#if !(id in players):
-	players[id] = ""
+	players[id] = "Innocent"
 	
 	# Server sends the info of existing players back to the new player
 	if get_tree().is_network_server():
@@ -90,14 +90,14 @@ remote func game_setup(): #this will setup every player instance for every playe
 			player_instance.playerID = str(peer_id)
 			
 	if MultiplayerHandler.is_host:
-		players[1] = ""
+		players[1] = "Innocent"
 		impostor = pick_impostor()
 		rpc("impostor_picked", impostor)
 
 remotesync func impostor_picked(wer_impostor):
 	impostor = wer_impostor
 	print(impostor, " das wurde von allen am Ende geprintet")
-	players[impostor] = "I am impostor"
+	players[impostor] = "Impostor"
 	print(players)
 	game_started()
 	
