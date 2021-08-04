@@ -1,12 +1,14 @@
 extends Node2D
 
-
+puppet var slave_impostor
 
 var players = {}
+var impostor
+
 
 
 func _ready():
-	
+	slave_impostor = impostor
 	if not MultiplayerHandler.is_host:
 		$"CanvasLayer/START GAME!".hide()
 	print("func ready (World)")
@@ -86,21 +88,26 @@ remote func game_setup(): #this will setup every player instance for every playe
 			player_instance.set_network_master(peer_id)
 			get_node("/root/World/YSort").add_child(player_instance)
 			player_instance.playerID = str(peer_id)
-	game_started()
 			
-func game_started():
 	if MultiplayerHandler.is_host:
-		update_player_list()
 		players[1] = ""
-		update_player_list()
-		pick_impostor()
-		print(pick_impostor())
+		impostor = pick_impostor()
+		rpc("impostor_picked", impostor)
+	game_started()
+
+remote func impostor_picked(wer_impostor):
+	impostor = wer_impostor
+	print(impostor, " das wurde von allen am Ende geprintet")
+	
+
+func game_started():
+	pass
 	
 func pick_impostor():
 	var a = players.keys()
 	a = a[randi() % a.size()]
 	
-	print(a)
+	print(a, " das ist der zuerst gepickte Impostor")
 	return a
 
 
