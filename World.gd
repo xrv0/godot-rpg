@@ -6,6 +6,7 @@ var players = {}
 
 
 func _ready():
+	
 	if not MultiplayerHandler.is_host:
 		$"CanvasLayer/START GAME!".hide()
 	print("func ready (World)")
@@ -85,5 +86,21 @@ remote func game_setup(): #this will setup every player instance for every playe
 			player_instance.set_network_master(peer_id)
 			get_node("/root/World/YSort").add_child(player_instance)
 			player_instance.playerID = str(peer_id)
+	game_started()
 			
+func game_started():
+	if MultiplayerHandler.is_host:
+		update_player_list()
+		players[1] = ""
+		update_player_list()
+		pick_impostor()
+		print(pick_impostor())
+	
+func pick_impostor():
+	var a = players.keys()
+	a = a[randi() % a.size()]
+	
+	print(a)
+	return a
+
 
