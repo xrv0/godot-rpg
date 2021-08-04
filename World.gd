@@ -93,11 +93,13 @@ remote func game_setup(): #this will setup every player instance for every playe
 		players[1] = ""
 		impostor = pick_impostor()
 		rpc("impostor_picked", impostor)
-	game_started()
 
-remote func impostor_picked(wer_impostor):
+remotesync func impostor_picked(wer_impostor):
 	impostor = wer_impostor
 	print(impostor, " das wurde von allen am Ende geprintet")
+	players[impostor] = "I am impostor"
+	print(players)
+	game_started()
 	
 
 func game_started():
