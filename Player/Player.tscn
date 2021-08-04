@@ -752,7 +752,6 @@ tracks/0/keys = {
 }
 
 [node name="Player" type="KinematicBody2D"]
-position = Vector2( 101.583, 74.0824 )
 collision_layer = 2
 script = ExtResource( 2 )
 __meta__ = {
