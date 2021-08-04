@@ -8,20 +8,24 @@ var players = {}
 func _ready():
 	if not MultiplayerHandler.is_host:
 		$"CanvasLayer/START GAME!".hide()
+	print("func ready (World)")
 	get_tree().connect("network_peer_connected", self, "_player_connected")
 	get_tree().connect("connected_to_server", self, "_connected_to_server_ok")
 
 func _player_connected(id): #when someone else connects, I will register the player into my player list dictionary
+	print("player connected (World)")
 	print("Hello other players. I just connected and I wont see this message!: ", id)
 	#rpc("register_player", get_tree().get_network_unique_id())
 	register_player(id)
 #This function not needed, just to double check ID		
-func _connected_to_server_ok(): 	
+func _connected_to_server_ok(): 
+	print("player connected server ok (World)")	
 	print("(My eyes only)I connected to the server! This is my ID: ", str(get_tree().get_network_unique_id()))	
 	#rpc("register_player", get_tree().get_network_unique_id())
 #	if game_started:
 
 remote func register_player(id): 
+	print("register player(World)")
 	print("Everyone sees this.. adding this id to your array! ", id) # everyone sees this
 	#the server will see this... better tell this guy who else is already in...
 	#if !(id in players):
@@ -38,6 +42,7 @@ remote func register_player(id):
 		rpc("update_player_list") # not needed, just double checks everyone on same page
 #Not needed, double check everyone on sme page
 remote func update_player_list():
+	print("update player list(World)")
 	for x in players:
 		print(x)
 		
@@ -51,6 +56,7 @@ func update_player_list_local(): #when updatelist button is pressed
 
 	
 remote func game_setup(): #this will setup every player instance for every player
+	print("game setup(World)")
 	if MultiplayerHandler.is_host:
 		print("Host hats bekommen")
 		rpc("game_setup")
@@ -58,6 +64,7 @@ remote func game_setup(): #this will setup every player instance for every playe
 	$"CanvasLayer/START GAME!".hide()
 	#first the host will setup the game on their end
 	if get_tree().is_network_server():
+		print("loading myself (World)")
 #		yfor peer_id in players:                                          
 #			var player_instance = load("res://Player.tscn").instance()	
 #			player_instance.set_name(str(peer_id))
@@ -69,7 +76,8 @@ remote func game_setup(): #this will setup every player instance for every playe
 		player_instance.set_network_master(1)
 		get_node("/root/World/YSort").add_child(player_instance)
 		player_instance.playerID = str(1)
-			
+		
+	print("loading other peers (World)")	
 	#Next evey player will spawn every other player including the server's own client! Try to move this to server only 
 	for peer_id in players:
 			var player_instance = load("res://Player/Player.tscn").instance()	
