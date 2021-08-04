@@ -45,7 +45,8 @@ func _ready():
 	randomize()
 	stats.connect("no_health", self, "queue_free")
 	swordHitbox.knockback_vector = roll_vector
-	$RemoteTransform2D.set_remote_node("../../../Camera2D")
+	if is_network_master():
+		$RemoteTransform2D.set_remote_node("../../../Camera2D")
 
 func _physics_process(delta):
 	#if is_network_master():
