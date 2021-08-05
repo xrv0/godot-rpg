@@ -2,12 +2,12 @@ extends Node2D
 
 puppet var slave_impostor
 
+
 var players = {}
 var player_jobs = players
 var jobs = ["Holzfäller", "Wächter", "Jäger", "Baumeister", "Koch"]
 var impostor
-
-
+var ready_to_pick_job = false
 
 func _ready():
 	randomize()
@@ -17,6 +17,8 @@ func _ready():
 	print("func ready (World)")
 	get_tree().connect("network_peer_connected", self, "_player_connected")
 	get_tree().connect("connected_to_server", self, "_connected_to_server_ok")
+	
+	
 
 func _player_connected(id): #when someone else connects, I will register the player into my player list dictionary
 	print("player connected (World)")
@@ -67,6 +69,7 @@ remotesync func game_start():
 		pass
 	
 remote func game_setup(): #this will setup every player instance for every player
+	players[1] = "Innocent"
 	print("game setup(World)")
 	if MultiplayerHandler.is_host:
 		print("Host hats bekommen")
@@ -96,33 +99,34 @@ remote func game_setup(): #this will setup every player instance for every playe
 			player_instance.set_network_master(peer_id)
 			get_node("/root/World/YSort").add_child(player_instance)
 			player_instance.playerID = str(peer_id)
-			
 	if MultiplayerHandler.is_host:
-		players[1] = "Innocent"
 		impostor = pick_impostor()
 		rpc("impostor_picked", impostor)
+		jobs.shuffle()
+		rpc("pick_jobs", jobs)
 
 remotesync func impostor_picked(wer_impostor):
 	impostor = wer_impostor
 	print(impostor, " das wurde von allen am Ende geprintet")
 	players[impostor] = "Impostor"
 	print(players)
-	if MultiplayerHandler.is_host:
-		jobs.shuffle()
-		rpc("pick_jobs", jobs)
-		game_start()
+	
+		 #game_start()
 	
 func pick_impostor():
 	var a = players.keys()
 	a = a[randi() % a.size()]
-	
 	print(a, " das ist der zuerst gepickte Impostor")
 	return a
-
+	
 remotesync func pick_jobs(shuffled_jobs):
+	print("Doing it")
 	for x in player_jobs:
 		player_jobs[x] = shuffled_jobs.pop_front()
+		var a = str('"YSort/', x, '"')
+		
 	print(player_jobs)
+	
 	
 #get_tree().get_network_unique_id()
 	

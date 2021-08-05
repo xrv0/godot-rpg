@@ -135,7 +135,7 @@ func attack_state():
 #remote func puppet_animation(animation_type):
 #	if not is_network_master():
 #		animationState.travel(animation_type)
-		
+
 
 func move():
 	velocity = move_and_slide(velocity)
@@ -147,7 +147,6 @@ func roll_animation_finished():
 	
 func attack_animation_finished():
 	state = MOVE
-
 
 func _on_Hurtbox_area_entered(area):
 	if is_network_master():

@@ -36,6 +36,7 @@ func join_server():
 func load_lobby():
 	print("load lobby (Menu)")
 	get_tree().change_scene("res://World.tscn")
+
 	
 #func _player_connected(id): #when someone else connects, I will register the player into my player list dictionary
 #	print("player connected")
