@@ -753,7 +753,7 @@ tracks/0/keys = {
 "values": [ false ]
 }
 
-[node name="Player" type="KinematicBody2D"]
+[node name="Lumberjack" type="KinematicBody2D"]
 collision_layer = 2
 script = ExtResource( 2 )
 __meta__ = {
