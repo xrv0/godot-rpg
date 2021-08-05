@@ -121,10 +121,9 @@ func pick_impostor():
 
 remotesync func pick_jobs(shuffled_jobs):
 	for x in player_jobs:
-		var a = 0
-		players[x] = jobs.pop_front()
-	print("Jobs are: ", player_jobs)
+		player_jobs[x] = shuffled_jobs.pop_front()
+	print(player_jobs)
 	
-
+#get_tree().get_network_unique_id()
 	
 
