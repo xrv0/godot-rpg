@@ -3,11 +3,14 @@ extends Node2D
 puppet var slave_impostor
 
 var players = {}
+var player_jobs = players
+var jobs = ["Holzfäller", "Wächter", "Jäger", "Baumeister", "Koch"]
 var impostor
 
 
 
 func _ready():
+	randomize()
 	slave_impostor = impostor
 	if not MultiplayerHandler.is_host:
 		$"CanvasLayer/START GAME!".hide()
@@ -33,6 +36,8 @@ remote func register_player(id):
 	#the server will see this... better tell this guy who else is already in...
 	#if !(id in players):
 	players[id] = "Innocent"
+	if is_network_master():
+		pass
 	
 	# Server sends the info of existing players back to the new player
 	if get_tree().is_network_server():
@@ -57,6 +62,9 @@ func update_player_list_local(): #when updatelist button is pressed
 #			for x in players:
 #				print(x)
 
+remotesync func game_start():
+	if is_network_master():
+		pass
 	
 remote func game_setup(): #this will setup every player instance for every player
 	print("game setup(World)")
@@ -99,11 +107,10 @@ remotesync func impostor_picked(wer_impostor):
 	print(impostor, " das wurde von allen am Ende geprintet")
 	players[impostor] = "Impostor"
 	print(players)
-	game_started()
-	
-
-func game_started():
-	pass
+	if MultiplayerHandler.is_host:
+		jobs.shuffle()
+		rpc("pick_jobs", jobs)
+		game_start()
 	
 func pick_impostor():
 	var a = players.keys()
@@ -112,4 +119,12 @@ func pick_impostor():
 	print(a, " das ist der zuerst gepickte Impostor")
 	return a
 
+remotesync func pick_jobs(shuffled_jobs):
+	for x in player_jobs:
+		var a = 0
+		players[x] = jobs.pop_front()
+	print("Jobs are: ", player_jobs)
+	
+
+	
 
