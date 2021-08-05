@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=2]
+[gd_scene load_steps=68 format=2]
 
 [ext_resource path="res://World/Bush.tscn" type="PackedScene" id=1]
 [ext_resource path="res://World.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://World/DirtTileset.png" type="Texture" id=4]
 [ext_resource path="res://World/CliffTileset.png" type="Texture" id=5]
 [ext_resource path="res://World/Grass.tscn" type="PackedScene" id=6]
+[ext_resource path="res://World/Lumberjack_House.png" type="Texture" id=7]
 [ext_resource path="res://World/Tree.tscn" type="PackedScene" id=8]
 [ext_resource path="res://UI/HealthUI.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Camera2D.tscn" type="PackedScene" id=10]
@@ -1063,13 +1064,13 @@ position = Vector2( 240, -24 )
 position = Vector2( 296, -80 )
 
 [node name="Tree51" parent="YSort/Trees" instance=ExtResource( 8 )]
-position = Vector2( 160, -136 )
+position = Vector2( 144, -144 )
 
 [node name="Tree44" parent="YSort/Trees" instance=ExtResource( 8 )]
 position = Vector2( 24, -328 )
 
 [node name="Tree45" parent="YSort/Trees" instance=ExtResource( 8 )]
-position = Vector2( 24, -328 )
+position = Vector2( -8, -328 )
 
 [node name="Tree3" parent="YSort/Trees" instance=ExtResource( 8 )]
 position = Vector2( 264, 48 )
@@ -1078,6 +1079,11 @@ position = Vector2( 264, 48 )
 position = Vector2( 24, 144 )
 
 [node name="Enemies" type="YSort" parent="YSort"]
+
+[node name="Lumberjack_House" type="Sprite" parent="YSort"]
+position = Vector2( -24, -304 )
+texture = ExtResource( 7 )
+offset = Vector2( -2, -4 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

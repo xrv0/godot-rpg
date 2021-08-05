@@ -4,15 +4,17 @@ puppet var slave_impostor
 
 
 var players = {}
+var player_role = {}
 var player_jobs = players
-var jobs = ["Holzfäller", "Wächter", "Jäger", "Baumeister", "Koch"]
+#var jobs = ["Lumberjack", "Wächter", "Jäger", "Baumeister", "Koch"]
+var jobs = ["Lumberjack", "Player"]
 var impostor
 var ready_to_pick_job = false
 
 func _ready():
 	randomize()
 	slave_impostor = impostor
-	if not MultiplayerHandler.is_host:
+	if not get_tree().is_network_server():
 		$"CanvasLayer/START GAME!".hide()
 	print("func ready (World)")
 	get_tree().connect("network_peer_connected", self, "_player_connected")
@@ -37,9 +39,8 @@ remote func register_player(id):
 	print("Everyone sees this.. adding this id to your array! ", id) # everyone sees this
 	#the server will see this... better tell this guy who else is already in...
 	#if !(id in players):
-	players[id] = "Innocent"
-	if is_network_master():
-		pass
+	players[id] = ""
+	player_role[id] = "Innocent"
 	
 	# Server sends the info of existing players back to the new player
 	if get_tree().is_network_server():
@@ -63,29 +64,22 @@ func update_player_list_local(): #when updatelist button is pressed
 #		if get_tree().is_network_server():
 #			for x in players:
 #				print(x)
-
-remotesync func game_start():
-	if is_network_master():
-		pass
 	
 remote func game_setup(): #this will setup every player instance for every player
-	players[1] = "Innocent"
-	print("game setup(World)")
-	if MultiplayerHandler.is_host:
-		print("Host hats bekommen")
+	if get_tree().is_network_server():
 		rpc("game_setup")
-	print("Wow2")
+	player_role[1] = "Innocent"
+	print(players)
+	print("game setup(World)")
 	$"CanvasLayer/START GAME!".hide()
 	#first the host will setup the game on their end
 	if get_tree().is_network_server():
-		print("loading myself (World)")
-#		yfor peer_id in players:                                          
-#			var player_instance = load("res://Player.tscn").instance()	
-#			player_instance.set_name(str(peer_id))
-#			player_instance.set_network_master(peer_id)
-#			get_node("/root").add_child(player_instance)
-			#player_instance.playerID = str(1) 
-		var player_instance = load("res://Player/Player.tscn").instance()	#dont forget to add yourself  server guy!
+		impostor = pick_impostor()
+		rpc("impostor_picked", impostor)
+		jobs.shuffle()
+		rpc("pick_jobs", jobs)
+			
+		var player_instance = load("res://Player/Lumberjack.tscn").instance()	#dont forget to add yourself  server guy!
 		player_instance.set_name(str(1))
 		player_instance.set_network_master(1)
 		get_node("/root/World/YSort").add_child(player_instance)
@@ -94,37 +88,29 @@ remote func game_setup(): #this will setup every player instance for every playe
 	print("loading other peers (World)")	
 	#Next evey player will spawn every other player including the server's own client! Try to move this to server only 
 	for peer_id in players:
-			var player_instance = load("res://Player/Player.tscn").instance()	
+			var player_instance = load("res://Player/Lumberjack.tscn").instance()	
 			player_instance.set_name(str(peer_id))			
 			player_instance.set_network_master(peer_id)
 			get_node("/root/World/YSort").add_child(player_instance)
 			player_instance.playerID = str(peer_id)
-	if MultiplayerHandler.is_host:
-		impostor = pick_impostor()
-		rpc("impostor_picked", impostor)
-		jobs.shuffle()
-		rpc("pick_jobs", jobs)
+	
 
 remotesync func impostor_picked(wer_impostor):
 	impostor = wer_impostor
 	print(impostor, " das wurde von allen am Ende geprintet")
-	players[impostor] = "Impostor"
-	print(players)
-	
-		 #game_start()
+	player_role[impostor] = "Impostor"
+	print(player_role)
+
 	
 func pick_impostor():
-	var a = players.keys()
+	var a = player_role.keys()
 	a = a[randi() % a.size()]
 	print(a, " das ist der zuerst gepickte Impostor")
 	return a
 	
 remotesync func pick_jobs(shuffled_jobs):
-	print("Doing it")
 	for x in player_jobs:
-		player_jobs[x] = shuffled_jobs.pop_front()
-		var a = str('"YSort/', x, '"')
-		
+		player_jobs[x] = shuffled_jobs.pop_front()		
 	print(player_jobs)
 	
 	
