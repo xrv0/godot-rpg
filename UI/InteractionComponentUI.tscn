@@ -17,10 +17,10 @@ interaction_default_texture = ExtResource( 2 )
 interaction_default_text = "Interact"
 
 [node name="TextureRect" type="TextureRect" parent="."]
-margin_left = -8.13243
-margin_top = -40.0
-margin_right = 8.86758
-margin_bottom = -23.0
+margin_left = -6.13243
+margin_top = -37.0
+margin_right = 6.86757
+margin_bottom = -24.0
 texture = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false

@@ -4,7 +4,7 @@
 [ext_resource path="res://World/Buildings/Saw.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 6.47159, 5.63475 )
+extents = Vector2( 3.38744, 3.39456 )
 
 [node name="Saw" type="StaticBody2D"]
 collision_layer = 129
