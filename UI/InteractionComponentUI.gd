@@ -19,19 +19,19 @@ func _ready():
 	hide()
 	
 func _process(delta : float):
-	pass
 	# Because we're a child of the player we'll always be moving relative to them
 	# But when we're set against an item we should stick above it
 	# So each frame we'll make sure we're moved to our fixed_position
 	#self.set_global_position(MultiplayerHandler.camera_position)
+	set_global_position(fixed_position)
 	#var fixed_position = 
 	#set_global_position(parent_component_nodepath.get_global_position()
 	
 func _physics_process(delta):
+	pass
 	#var parent_component_position = get_node(parent_component_nodepath).get_global_position()
-	self.set_global_position(MultiplayerHandler.camera_position)
+	#self.set_global_position(MultiplayerHandler.camera_position)
 	#var fixed_position = Vector2(parent_component_nodepath.global_position().x, parent_component_nodepath.global_position().y)
-	
 
 func interactable_target_changed(newInteractable : Node) -> void:
 	# If the new interactable thing is null it means we've moved out of range
@@ -61,9 +61,9 @@ func interactable_target_changed(newInteractable : Node) -> void:
 	
 	# Record the position we should fix ourselves to
 	# This should be just above the interactable item
-	#fixed_position = Vector2(newInteractable.get_global_position().x, newInteractable.get_global_position().y - 50)
+	fixed_position = Vector2(newInteractable.get_global_position().x, newInteractable.get_global_position().y - 20)
 	
-	#self.set_global_position(fixed_position)
+	self.set_global_position(fixed_position)
 	
 	# Then ensure we show ourselves
 	show()
