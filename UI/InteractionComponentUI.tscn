@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://UI/InteractionComponentUI.gd" type="Script" id=1]
+[ext_resource path="res://UI/InteractButton.png" type="Texture" id=2]
+
+[node name="InteractionComponentUI" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 0.132431
+margin_right = 0.132446
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+interaction_texture_nodepath = NodePath("TextureRect")
+interaction_default_texture = ExtResource( 2 )
+interaction_default_text = "Interact"
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_left = -8.13243
+margin_top = -40.0
+margin_right = 8.86758
+margin_bottom = -23.0
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

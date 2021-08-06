@@ -27,7 +27,7 @@ func _player_connected(id): #when someone else connects, I will register the pla
 	print("Hello other players. I just connected and I wont see this message!: ", id)
 	#rpc("register_player", get_tree().get_network_unique_id())
 	register_player(id)
-#This function not needed, just to double check ID		
+#This function not needed just to double check ID		
 func _connected_to_server_ok(): 
 	print("player connected server ok (World)")	
 	print("(My eyes only)I connected to the server! This is my ID: ", str(get_tree().get_network_unique_id()))	

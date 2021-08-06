@@ -8,3 +8,6 @@ func _ready():
 	limit_left = topLeft.position.x
 	limit_bottom = bottomRight.position.y
 	limit_right = bottomRight.position.x
+	
+func _physics_process(delta):
+	MultiplayerHandler.camera_position = self.get_global_position()

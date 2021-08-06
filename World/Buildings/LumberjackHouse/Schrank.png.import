@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Lumberjack_House.png-4ef1a31fad98eba9690a5f87414dad55.stex"
+path="res://.import/Schrank.png-fd994c73048cfc2f7717f53c31a0908b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://World/Lumberjack_House.png"
-dest_files=[ "res://.import/Lumberjack_House.png-4ef1a31fad98eba9690a5f87414dad55.stex" ]
+source_file="res://World/Buildings/LumberjackHouse/Schrank.png"
+dest_files=[ "res://.import/Schrank.png-fd994c73048cfc2f7717f53c31a0908b.stex" ]
 
 [params]
 

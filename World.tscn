@@ -1079,6 +1079,9 @@ position = Vector2( 264, 48 )
 [node name="Tree2" parent="YSort/Trees" instance=ExtResource( 8 )]
 position = Vector2( 24, 144 )
 
+[node name="Tree52" parent="YSort/Trees" instance=ExtResource( 8 )]
+position = Vector2( 152, 56 )
+
 [node name="Enemies" type="YSort" parent="YSort"]
 
 [node name="Buildings" type="YSort" parent="YSort"]
@@ -1086,10 +1089,10 @@ position = Vector2( 24, 144 )
 [node name="Lumberjack House" type="YSort" parent="YSort/Buildings"]
 
 [node name="Saw" parent="YSort/Buildings/Lumberjack House" instance=ExtResource( 12 )]
-position = Vector2( 10, -284 )
+position = Vector2( 10, -282 )
 
 [node name="LumberjackHouse" parent="YSort/Buildings/Lumberjack House" instance=ExtResource( 7 )]
-position = Vector2( -24, -270 )
+position = Vector2( -26, -264 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
