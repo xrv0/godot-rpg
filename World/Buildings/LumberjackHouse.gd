@@ -1,9 +1,52 @@
 extends Node2D
+
+func _ready():
+	$Full/HouseFull.show()
+	$Full/HouseFull.show()
+
+func _on_Area2D_body_entered(body):
+	print("Haus betreten")
+	#if body == Lumberjack:
+	$Full/HouseFull.hide()
+
+
+func _on_Area2D_body_exited(body):
+	#if body == Lumberjack:
+	$Full/HouseFull.show()
+
+
+#if inside:
+#		$"../Full/OpenDoorHouseFull".show()
+#		$"../FullWall/CollisionShape2D".set_deferred("disabled", true)
+#		$Sprite.hide()
+#		if timer_started == false:
+#			print("Timer gestarted")
+#			timer_started = true
+#			var timer = Timer.new()
+#			timer.connect("timeout",self,"_on_timer_timeout") 
+#			add_child(timer)
+#			timer.start(4)
 #
-#func interaction_can_interact(interactionComponentParent : Node) -> bool:
-#	return interactionComponentParent is Lumberjack
+#	else:
+#		$"../Full/HouseFull".hide()
+#		$"../Full/OpenDoorHouseFull".hide()
+#		$Sprite.hide()
+#		if timer_started == false:
+#			print("Timer gestarted")
+#			timer_started = true
+#			var timer = Timer.new()
+#			timer.connect("timeout",self,"_on_timer_timeout") 
+#			add_child(timer)
+#			timer.start(3)
+#			$"../FullWall/CollisionShape2D".set_deferred("disabled", true)
+#			#collision_layer = collision_layer ^ 128
 #
-#func interaction_interact(interactionComponentParent : Node) -> void:
-#	$HouseFull.hide()
-#	$FullWall/CollisionShape2D.set_deferred("disabled", true)
-#
+#func _on_timer_timeout():
+#	$"../FullWall/CollisionShape2D".set_deferred("disabled", false)
+#	if inside:
+#		$"../Full/HouseFull".show()
+#	else:
+#		$Sprite.show()
+#	timer_started = false
+
+

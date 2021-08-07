@@ -18,10 +18,16 @@ _global_script_classes=[ {
 "class": "Lumberjack",
 "language": "GDScript",
 "path": "res://Player/Lumberjack.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "Player",
+"language": "GDScript",
+"path": "res://Player/Player.gd"
 } ]
 _global_script_class_icons={
 "InteractionComponentUI": "",
-"Lumberjack": ""
+"Lumberjack": "",
+"Player": ""
 }
 
 [application]

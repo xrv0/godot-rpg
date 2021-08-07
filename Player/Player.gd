@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+class_name Player
+
 const PlayerHurtSound = preload("res://Player/PlayerHurtSound.tscn")
 
 export var ACCELERATION = 500
