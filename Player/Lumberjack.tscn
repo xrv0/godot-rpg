@@ -756,7 +756,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="CircleShape2D" id=51]
-radius = 14.4743
+radius = 8.1444
 
 [node name="Lumberjack" type="KinematicBody2D"]
 collision_layer = 2
