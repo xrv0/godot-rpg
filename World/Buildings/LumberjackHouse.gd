@@ -4,16 +4,22 @@ func _ready():
 	$Full/HouseFull.show()
 	$Full/HouseFull.show()
 
-func _on_Area2D_body_entered(body):
-	print("Haus betreten")
-	#if body == Lumberjack:
-	$Full/HouseFull.hide()
+func _on_Area2D_body_entered(body : Node):
+	print("MeunIch habe ", body)
+	if check_body(body):
+	#if body == Player:
+		$Full/HouseFull.hide()
 
 
-func _on_Area2D_body_exited(body):
-	#if body == Lumberjack:
-	$Full/HouseFull.show()
+func _on_Area2D_body_exited(body : Node):
+	print("MeunIch habe ", body)
+	#if body == Player:
+	if check_body(body):
+		$Full/HouseFull.show()
 
+func check_body(body):
+	#return body is Lumberjack
+	return body is is_network_master()
 
 #if inside:
 #		$"../Full/OpenDoorHouseFull".show()

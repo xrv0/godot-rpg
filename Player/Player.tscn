@@ -759,7 +759,7 @@ tracks/0/keys = {
 radius = 8.10407
 
 [node name="Player" type="KinematicBody2D"]
-collision_layer = 2
+collision_layer = 258
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
