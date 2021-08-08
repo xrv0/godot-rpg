@@ -18,8 +18,7 @@ func _on_Area2D_body_exited(body : Node):
 		$Full/HouseFull.show()
 
 func check_body(body):
-	#return body is Lumberjack
-	return body is is_network_master()
+	return body is Lumberjack
 
 #if inside:
 #		$"../Full/OpenDoorHouseFull".show()

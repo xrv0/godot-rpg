@@ -7,13 +7,12 @@ func interaction_can_interact(interactionComponentParent : Node) -> bool:
 	return interactionComponentParent is Lumberjack
 
 func interaction_interact(interactionComponentParent : Node) -> void:
-	if is_network_master():
-		print("rpc raus")
-		rpc("slave_interaction_interact",interactionComponentParent)
+	print("rpc raus")
+	rpc("slave_interaction_interact",interactionComponentParent)
 	print("Ich habe interagiert")
-	$"../FullWall/CollisionShape2D".set_deferred("disabled", true)
-	$DoorOutside.hide()
-	collision_layer = collision_layer ^ 128
+#	$"../FullWall/CollisionShape2D".set_deferred("disabled", true)
+#	$DoorOutside.hide()
+#	collision_layer = collision_layer ^ 128
 
 func _on_Area2D_body_entered(body : Node):
 	if is_network_master():
@@ -39,7 +38,7 @@ func _on_Area2D_body_exited(body : Node):
 
 
 
-remote func slave_interaction_interact(interactionComponentParent : Node) -> void:
+remotesync func slave_interaction_interact(interactionComponentParent : Node) -> void:
 	print("rpc tür ")
 	$"../FullWall/CollisionShape2D".set_deferred("disabled", true)
 	$DoorOutside.hide()

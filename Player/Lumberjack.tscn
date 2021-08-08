@@ -759,7 +759,7 @@ tracks/0/keys = {
 radius = 8.1444
 
 [node name="Lumberjack" type="KinematicBody2D"]
-collision_layer = 258
+collision_layer = 2
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true

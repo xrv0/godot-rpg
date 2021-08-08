@@ -36,7 +36,8 @@ onready var blinkAnimationPlayer = $BlinkAnimationPlayer
 onready var sprite = $Sprite
 	
 func _ready():
-	#if is_network_master():
+	if is_network_master():
+		collision_layer = 258
 	self.global_transform.origin.x = 160
 	self.global_transform.origin.y = 88
 	animationTree.active = true
