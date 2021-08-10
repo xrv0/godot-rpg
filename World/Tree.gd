@@ -1,5 +1,7 @@
 extends StaticBody2D
 
+class_name tree
+
 var leben = 4
 
 func _on_Hurtbox_area_entered(area):
@@ -11,7 +13,8 @@ func interaction_can_interact(interactionComponentParent : Node) -> bool:
 	return interactionComponentParent is Lumberjack
 
 func interaction_interact(interactionComponentParent : Node) -> void:
-	print("chop chop")
+	var a = interactionComponentParent.get_parent()
+	a.wood_chopped()
 	leben -= 1
 	if leben == 0:
 		queue_free()

@@ -857,6 +857,7 @@ follow_viewport_enable = true
 interaction_component_nodepath = NodePath("../../InteractionComponent")
 parent_component_nodepath = NodePath("../..")
 
+[connection signal="body_entered" from="HitboxPivot/SwortHitbox" to="." method="_on_SwortHitbox_body_entered"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]
 [connection signal="invincibility_started" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_started"]
