@@ -12,8 +12,9 @@ export var interaction_default_text : String
 var fixed_position : Vector2
 
 func _ready():
+	if is_network_master():
 	# We need to connect ourselves to the interaction components signal
-	get_node(interaction_component_nodepath).connect("on_interactable_changed", self, "interactable_target_changed", [], CONNECT_DEFERRED)
+		get_node(interaction_component_nodepath).connect("on_interactable_changed", self, "interactable_target_changed", [], CONNECT_DEFERRED)
 	#var parent_component = get_node(parent_component_nodepath)
 	# On load we should be hidden
 	hide()

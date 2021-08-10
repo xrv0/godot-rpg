@@ -31,18 +31,9 @@ extents = Vector2( 9.35875, 1.46345 )
 [node name="LumberjackHouse" type="YSort"]
 script = ExtResource( 6 )
 
-[node name="Area2D2" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="."]
 collision_layer = 256
 collision_mask = 256
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
-light_mask = 1025
-position = Vector2( -2, -20 )
-shape = SubResource( 1 )
-
-[node name="Area2D" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 light_mask = 1025
@@ -137,7 +128,7 @@ self_modulate = Color( 1, 1, 1, 0.254902 )
 position = Vector2( -16.38, 25.2328 )
 shape = SubResource( 7 )
 
-[connection signal="body_entered" from="Area2D2" to="." method="_on_Area2D_body_entered"]
-[connection signal="body_exited" from="Area2D2" to="." method="_on_Area2D_body_exited"]
 [connection signal="body_entered" from="Area2D" to="Door" method="_on_Area2D_body_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Area2D" to="Door" method="_on_Area2D_body_exited"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]
