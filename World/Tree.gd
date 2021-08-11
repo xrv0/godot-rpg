@@ -14,9 +14,8 @@ func interaction_can_interact(interactionComponentParent : Node) -> bool:
 
 func interaction_interact(interactionComponentParent : Node) -> void:
 	if is_network_master():
-		
+		get_node("/root/World/CanvasLayer/ReactionTest").reaction_test()
 		get_node("/root/World/CanvasLayer/FarmedItemList").add_item("Wood")
-		
 	var a = interactionComponentParent.get_parent()
 	a.wood_chopped()
 	leben -= 1
