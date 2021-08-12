@@ -1,6 +1,6 @@
 extends Control
 
-var body
+var current_body
 var green = false
 
 var x
@@ -8,24 +8,24 @@ var x
 func _ready():
 	self.hide()
 
+
+
 func _input(event):
 	if event.is_action_pressed("ui_select"):
 		if green == true:
-			var n = reaction_test(body)
-			n.resume()
+			current_body.reaction_test_passed()
+			$AnimationPlayer.stop()
+			hide()
 		else:
-#			$AnimationPlayer.stop()
-#			$AnimationPlayer.play("ReactionBar")
-			pass
+			$AnimationPlayer.stop()
+			$AnimationPlayer.play("ReactionBar")
 
 func reaction_test(body : Node):
-	print(body, "zuerst")
-	x = body
-	print("Ich mache den Test")
+	#print(body, "zuerst")
+	current_body = body
 	self.show()
 	$AnimationPlayer.play("ReactionBar")
-	yield()
-	print(body, "danach")
+	print(current_body)
 	#body.reaction_test_passed()
 	
 	
