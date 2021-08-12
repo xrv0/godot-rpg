@@ -9,7 +9,8 @@ var y = 1
 func _ready():
 	self.hide()
 
-
+func _process(delta):
+	pass
 
 func _input(event):
 	if event.is_action_pressed("ui_select"):
