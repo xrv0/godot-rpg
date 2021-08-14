@@ -589,6 +589,7 @@ position = Vector2( -544, -344 )
 position = Vector2( 856, 536 )
 
 [node name="YSort" type="YSort" parent="."]
+position = Vector2( 1, 0 )
 
 [node name="Bushes" type="YSort" parent="YSort"]
 
