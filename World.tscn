@@ -1107,6 +1107,14 @@ position = Vector2( 182, 40 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
+[node name="ReactionTest" parent="CanvasLayer" instance=ExtResource( 15 )]
+visible = false
+margin_left = 161.0
+margin_top = 152.0
+margin_right = 161.0
+margin_bottom = 152.0
+rect_scale = Vector2( 2, 2 )
+
 [node name="FarmedItemList" parent="CanvasLayer" instance=ExtResource( 17 )]
 margin_left = 288.0
 margin_top = 8.0
@@ -1120,14 +1128,6 @@ margin_left = 6.31498
 margin_top = 138.0
 margin_right = 154.315
 margin_bottom = 113.08
-
-[node name="ReactionTest" parent="CanvasLayer" instance=ExtResource( 15 )]
-visible = false
-margin_left = 161.0
-margin_top = 152.0
-margin_right = 161.0
-margin_bottom = 152.0
-rect_scale = Vector2( 2, 2 )
 
 [connection signal="pressed" from="CanvasLayer/START GAME!" to="." method="game_setup"]
 
