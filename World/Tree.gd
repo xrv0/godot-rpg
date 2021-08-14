@@ -1,32 +1,25 @@
 extends StaticBody2D
 
+var interaction_ongoing = false
+var a #interactionComponentParentsParent
 class_name tree
-
-var a
-var leben = 4
-
-func _on_Hurtbox_area_entered(area):
-	leben -= 1
-	if leben == 0:
-		queue_free()
 
 func interaction_can_interact(interactionComponentParent : Node) -> bool:
 	return interactionComponentParent is Lumberjack
 
 func interaction_interact(interactionComponentParent : Node) -> void:
+	if interaction_ongoing == false:
+		interaction_ongoing = true
 	a = interactionComponentParent.get_parent()
-	if is_network_master():
-		get_node("/root/World/CanvasLayer/ReactionTest").reaction_test(self)
-	
+	a.interaction_start() #Tell Player that interaction started an pass on own Node
+		#Jetzt den Reaktionstest callen und die eigene Node weiterreichen
+	get_node("/root/World/CanvasLayer/ReactionTest").start_test(get_node("."))
 	
 func reaction_test_passed():
-	if is_network_master():
-		get_node("/root/World/CanvasLayer/FarmedItemList").add_item("Wood")
-		rpc_unreliable("chop_it")
-	
-remotesync func chop_it():
-	a.wood_chopped()
-	leben -= 1
-	if leben == 0:
-		queue_free()
-		
+	interaction_ongoing = false
+	a.interaction_end("tree") #Inform the player that the interaction has ended
+	queue_free()
+
+func reaction_test_cancelled(): #Inform the player that the interaction has been cancelled
+	interaction_ongoing = false
+	a.interaction_cancelled()

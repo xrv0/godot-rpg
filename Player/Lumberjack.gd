@@ -2,6 +2,10 @@ extends "Player.gd"
 
 class_name Lumberjack
 
+
+func _ready():
+	animationTree.active = true
+
 var Items = {"wood": 0, "plank": 0,}
 
 func wood_chopped():
@@ -19,3 +23,17 @@ func check_wood():
 			get_node("/root/World/CanvasLayer/FarmedItemList").add_item("Planks")
 	else:
 		print("Du hast kein Holz")
+
+func interaction_start(): #Interaction has been triggered 
+	state = INTERACTION
+#
+func interaction_end(interaction_object):
+	state = MOVE
+	if interaction_object == "tree":
+		Items["wood"] += 1
+		print(Items["wood"])
+
+#
+#func interaction_cancelled():
+##	state = MOVE
+#

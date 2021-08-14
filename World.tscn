@@ -581,6 +581,7 @@ tile_data = PoolIntArray( -655377, 0, 0, -655376, 0, 1, -655375, 0, 2, -655368, 
 
 [node name="Camera2D" parent="." instance=ExtResource( 10 )]
 position = Vector2( 160, 88 )
+drag_margin_bottom = 0.0
 
 [node name="TopLeft" parent="Camera2D/Limits" index="0"]
 position = Vector2( -544, -344 )

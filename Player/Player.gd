@@ -12,7 +12,8 @@ export var FRICTION = 500
 enum {
 	MOVE,
 	ROLL,
-	ATTACK
+	ATTACK,
+	INTERACTION
 }
 
 var state = MOVE
@@ -60,6 +61,8 @@ func _physics_process(delta):
 				roll_state()
 			ATTACK:
 				attack_state()
+			INTERACTION:
+				interaction_state()
 				
 		
 		#rset_unreliable("slave_frame", sprite.frame)
@@ -73,8 +76,6 @@ func _physics_process(delta):
 		#input_vector = slave_input_vector
 		#sprite.frame = slave_frame
 	
-
-
 func move_state(delta):
 	
 	if is_network_master():
@@ -120,6 +121,7 @@ func move_state(delta):
 remote func puppet_is_action_just_pressed(state_transition):
 	if not is_network_master():
 		state = state_transition
+
 
 
 func roll_state():
@@ -168,3 +170,6 @@ func _on_Hurtbox_invincibility_started():
 func _on_Hurtbox_invincibility_ended():
 	if is_network_master():
 		blinkAnimationPlayer.play("Stop")
+		
+func interaction_state():
+	pass

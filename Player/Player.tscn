@@ -770,6 +770,7 @@ __meta__ = {
 script = ExtResource( 10 )
 
 [node name="ShadowSprite" type="Sprite" parent="."]
+centered = false
 
 [node name="MediumShadow" type="Sprite" parent="ShadowSprite"]
 position = Vector2( -0.388218, 1.3092 )
@@ -777,10 +778,11 @@ texture = ExtResource( 6 )
 
 [node name="Sprite" type="Sprite" parent="."]
 material = SubResource( 1 )
-position = Vector2( 0, -8.919 )
+position = Vector2( -31.8716, -40 )
 texture = ExtResource( 1 )
+centered = false
 hframes = 60
-frame = 27
+frame = 36
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = -1.57079
@@ -816,6 +818,7 @@ parameters/Run/blend_position = Vector2( 0, 1 )
 [node name="HitboxPivot" type="Position2D" parent="."]
 visible = false
 position = Vector2( 0, -4 )
+rotation = 1.5708
 __meta__ = {
 "_gizmo_extents_": 8.0
 }
