@@ -1,7 +1,7 @@
 [gd_scene load_steps=65 format=2]
 
-[ext_resource path="res://Player/Player.png" type="Texture" id=1]
-[ext_resource path="res://Player/Player.gd" type="Script" id=2]
+[ext_resource path="res://Player/StoneMason.png" type="Texture" id=1]
+[ext_resource path="res://Player/StoneMason.gd" type="Script" id=2]
 [ext_resource path="res://Overlap/Hitbox.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Player/SwordHitbox.gd" type="Script" id=4]
 [ext_resource path="res://Overlap/Hurtbox.tscn" type="PackedScene" id=5]
@@ -19,8 +19,8 @@ shader = ExtResource( 9 )
 shader_param/active = false
 
 [sub_resource type="CapsuleShape2D" id=2]
-radius = 3.99598
-height = 1.9679
+radius = 4.02071
+height = 1.42887
 
 [sub_resource type="Animation" id=3]
 length = 0.4
@@ -756,18 +756,19 @@ tracks/0/keys = {
 }
 
 [sub_resource type="CircleShape2D" id=51]
-radius = 8.10407
+radius = 8.1444
 
-[node name="Player" type="KinematicBody2D"]
-scale = Vector2( 1.00403, 1 )
+[node name="StoneMason" type="KinematicBody2D"]
 collision_layer = 2
 script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="RemoteTransform2D" parent="." instance=ExtResource( 11 )]
 script = ExtResource( 10 )
 
 [node name="ShadowSprite" type="Sprite" parent="."]
-centered = false
 
 [node name="MediumShadow" type="Sprite" parent="ShadowSprite"]
 position = Vector2( -0.388218, 1.3092 )
@@ -775,14 +776,12 @@ texture = ExtResource( 6 )
 
 [node name="Sprite" type="Sprite" parent="."]
 material = SubResource( 1 )
-position = Vector2( -31.8716, -40 )
+position = Vector2( 0, -8.919 )
 texture = ExtResource( 1 )
-centered = false
 hframes = 60
 frame = 36
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -2.51844e-08, 0.995986 )
 rotation = -1.57079
 shape = SubResource( 2 )
 
@@ -823,7 +822,7 @@ __meta__ = {
 
 [node name="SwortHitbox" parent="HitboxPivot" instance=ExtResource( 3 )]
 position = Vector2( 15, 0 )
-collision_mask = 8
+collision_mask = 72
 script = ExtResource( 4 )
 
 [node name="CollisionShape2D" parent="HitboxPivot/SwortHitbox" index="0"]
@@ -846,25 +845,20 @@ anims/Start = SubResource( 49 )
 anims/Stop = SubResource( 50 )
 
 [node name="InteractionComponent" parent="." instance=ExtResource( 12 )]
-position = Vector2( 0, 7 )
-collision_mask = 0
 interaction_parent = NodePath("..")
 
 [node name="CollisionShape2D" parent="InteractionComponent" index="0"]
-position = Vector2( -0.0662155, -7.21759 )
+position = Vector2( -0.0992126, -7.14328 )
 shape = SubResource( 51 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+follow_viewport_enable = true
 
-[node name="InteractionComponentUI" parent="." instance=ExtResource( 13 )]
-visible = false
-margin_left = 0.0
-margin_top = 1.90735e-06
-margin_right = 1.0
-margin_bottom = 6.00003
-rect_scale = Vector2( 1.02281, 0.990308 )
-interaction_component_nodepath = NodePath("..")
+[node name="InteractionComponentUI" parent="CanvasLayer" instance=ExtResource( 13 )]
+interaction_component_nodepath = NodePath("../../InteractionComponent")
+parent_component_nodepath = NodePath("../..")
 
+[connection signal="body_entered" from="HitboxPivot/SwortHitbox" to="." method="_on_SwortHitbox_body_entered"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]
 [connection signal="invincibility_started" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_started"]
@@ -872,4 +866,3 @@ interaction_component_nodepath = NodePath("..")
 [editable path="HitboxPivot/SwortHitbox"]
 [editable path="Hurtbox"]
 [editable path="InteractionComponent"]
-[editable path="InteractionComponentUI"]

@@ -79,7 +79,7 @@ remote func game_setup(): #this will setup every player instance for every playe
 		jobs.shuffle()
 		rpc("pick_jobs", jobs)
 			
-		var player_instance = load("res://Player/Lumberjack.tscn").instance()	#dont forget to add yourself  server guy!
+		var player_instance = load("res://Player/StoneMason.tscn").instance()	#dont forget to add yourself  server guy!
 		player_instance.set_name(str(1))
 		player_instance.set_network_master(1)
 		get_node("/root/World/YSort").add_child(player_instance)

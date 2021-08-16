@@ -17,8 +17,8 @@ func _on_Area2D_body_exited(body : Node):
 	if check_body(body):
 		$Full/HouseFull.show()
 
-func check_body(body):
-	return body is Lumberjack
+func check_body(body):df
+	return body # hier fixern
 
 #if inside:
 #		$"../Full/OpenDoorHouseFull".show()

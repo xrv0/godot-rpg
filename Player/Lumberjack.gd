@@ -13,6 +13,9 @@ func wood_chopped():
 	print(Items["wood"])
 
 func check_wood():
+	rpc("check_wood_4real")
+
+remotesync func check_wood_4real():
 	print(Items["wood"], " Holz")
 	if Items["wood"] > 0:
 		Items["plank"] = Items["wood"]
@@ -23,6 +26,12 @@ func check_wood():
 			get_node("/root/World/CanvasLayer/FarmedItemList").add_item("Planks")
 	else:
 		print("Du hast kein Holz")
+
+func pre_stash_wood(chest : Node):
+	rpc("stash_wood", chest)
+
+remotesync func stash_wood(chest : Node):
+	chest.get_wood(Items["plank"])
 
 func interaction_start(): #Interaction has been triggered 
 	rpc("puppet_interaction_start")
@@ -41,5 +50,5 @@ remotesync func puppet_interaction_end(interaction_object):
 
 remotesync func puppet_interaction_start():
 	state = INTERACTION
-	
+
 #

@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=2]
+[gd_scene load_steps=74 format=2]
 
 [ext_resource path="res://World/Bush.tscn" type="PackedScene" id=1]
 [ext_resource path="res://World.gd" type="Script" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://World/Buildings/Bed.tscn" type="PackedScene" id=13]
 [ext_resource path="res://World/Buildings/Wardrobe.tscn" type="PackedScene" id=14]
 [ext_resource path="res://UI/ReactionTest.tscn" type="PackedScene" id=15]
+[ext_resource path="res://World/Buildings/LumberjackWoodChest.tscn" type="PackedScene" id=16]
 [ext_resource path="res://UI/ItemsUI/FarmedItemList.tscn" type="PackedScene" id=17]
 
 [sub_resource type="TileSet" id=1]
@@ -1092,6 +1093,9 @@ position = Vector2( 24, 144 )
 [node name="Buildings" type="YSort" parent="YSort"]
 
 [node name="Lumberjack House" type="YSort" parent="YSort/Buildings"]
+
+[node name="LumberjackWoodChest" parent="YSort/Buildings/Lumberjack House" instance=ExtResource( 16 )]
+position = Vector2( 111, 56 )
 
 [node name="Saw" parent="YSort/Buildings/Lumberjack House" instance=ExtResource( 12 )]
 position = Vector2( 238, 54 )
