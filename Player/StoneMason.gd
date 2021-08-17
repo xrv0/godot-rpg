@@ -18,7 +18,13 @@ remotesync func check_stone_4real():
 		if is_network_master():
 			get_node("/root/World/CanvasLayer/FarmedItemList").add_item("Planks")
 
+#Chest System
+func pre_stash_stone(chest : Node):
+	rpc("stash_stone", chest)
 
+remotesync func stash_stone(chest : Node):
+	chest.get_stone(Items["brick"])
+	
 #Interaction System
 func interaction_start(): #Interaction has been triggered 
 	rpc("puppet_interaction_start")

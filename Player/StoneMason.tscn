@@ -845,6 +845,7 @@ anims/Start = SubResource( 49 )
 anims/Stop = SubResource( 50 )
 
 [node name="InteractionComponent" parent="." instance=ExtResource( 12 )]
+position = Vector2( 0.140308, 7.01539 )
 interaction_parent = NodePath("..")
 
 [node name="CollisionShape2D" parent="InteractionComponent" index="0"]
