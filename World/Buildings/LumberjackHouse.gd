@@ -17,7 +17,7 @@ func _on_Area2D_body_exited(body : Node):
 	if check_body(body):
 		$Full/HouseFull.show()
 
-func check_body(body):df
+func check_body(body):
 	return body # hier fixern
 
 #if inside:

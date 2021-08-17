@@ -4,7 +4,7 @@ var inside = 0
 var open = false
 
 func interaction_can_interact(interactionComponentParent : Node) -> bool:
-	return interactionComponentParent is Lumberjack
+	return interactionComponentParent is Player
 
 func interaction_interact(interactionComponentParent : Node) -> void:
 	print("rpc raus")
