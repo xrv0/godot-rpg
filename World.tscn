@@ -1,4 +1,4 @@
-[gd_scene load_steps=75 format=2]
+[gd_scene load_steps=76 format=2]
 
 [ext_resource path="res://World/Bush.tscn" type="PackedScene" id=1]
 [ext_resource path="res://World.gd" type="Script" id=2]
@@ -18,6 +18,7 @@
 [ext_resource path="res://World/Buildings/LumberjackWoodChest.tscn" type="PackedScene" id=16]
 [ext_resource path="res://UI/ItemsUI/FarmedItemList.tscn" type="PackedScene" id=17]
 [ext_resource path="res://World/Stone.tscn" type="PackedScene" id=18]
+[ext_resource path="res://World/StoneCuter.tscn" type="PackedScene" id=19]
 
 [sub_resource type="TileSet" id=1]
 0/name = "DirtTileset.png 0"
@@ -1114,6 +1115,9 @@ position = Vector2( 182, 40 )
 
 [node name="Stone" parent="YSort/FarmObjects" instance=ExtResource( 18 )]
 position = Vector2( 29, 64 )
+
+[node name="StoneCutter" parent="YSort/FarmObjects" instance=ExtResource( 19 )]
+position = Vector2( 17, 98 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
