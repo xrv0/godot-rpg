@@ -12,6 +12,9 @@ func _ready():
 	if class_type == 'Lumberjack':
 		$Sprite.set_frame(0)
 		type = Lumberjack
+	if class_type == 'Farmer':
+		$Sprite.set_frame(0)
+		type = Farmer
 
 func interaction_can_interact(interactionComponentParent : Node) -> bool:
 		return interactionComponentParent is type

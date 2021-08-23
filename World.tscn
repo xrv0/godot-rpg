@@ -15,7 +15,7 @@
 [ext_resource path="res://World/Buildings/Bed.tscn" type="PackedScene" id=13]
 [ext_resource path="res://World/Buildings/Wardrobe.tscn" type="PackedScene" id=14]
 [ext_resource path="res://UI/ReactionTest.tscn" type="PackedScene" id=15]
-[ext_resource path="res://World/Buildings/LumberjackWoodChest.tscn" type="PackedScene" id=16]
+[ext_resource path="res://World/CarrotFarm.tscn" type="PackedScene" id=16]
 [ext_resource path="res://UI/ItemsUI/FarmedItemList.tscn" type="PackedScene" id=17]
 [ext_resource path="res://World/Stone.tscn" type="PackedScene" id=18]
 [ext_resource path="res://World/StoneCuter.tscn" type="PackedScene" id=19]
@@ -616,9 +616,6 @@ position = Vector2( 184, 3 )
 
 [node name="Lumberjack" type="YSort" parent="YSort/Structures"]
 
-[node name="LumberjackWoodChest" parent="YSort/Structures/Lumberjack" instance=ExtResource( 16 )]
-position = Vector2( 219, -14 )
-
 [node name="Lumberjack House" type="YSort" parent="YSort/Structures/Lumberjack"]
 
 [node name="Saw" parent="YSort/Structures/Lumberjack/Lumberjack House" instance=ExtResource( 12 )]
@@ -633,6 +630,10 @@ position = Vector2( 285, -16 )
 [node name="Wardrobe" parent="YSort/Structures/Lumberjack/Lumberjack House" instance=ExtResource( 14 )]
 position = Vector2( 252, -19 )
 
+[node name="Chest" parent="YSort/Structures/Lumberjack/Lumberjack House" instance=ExtResource( 20 )]
+position = Vector2( 218, -8 )
+class_type = "Lumberjack"
+
 [node name="StoneMason" type="YSort" parent="YSort/Structures"]
 
 [node name="StoneCutter" parent="YSort/Structures/StoneMason" instance=ExtResource( 19 )]
@@ -641,8 +642,17 @@ position = Vector2( 102, -9 )
 [node name="Stone" parent="YSort/Structures/StoneMason" instance=ExtResource( 18 )]
 position = Vector2( 132, -35 )
 
-[node name="StoneChest" parent="YSort/Structures/StoneMason" instance=ExtResource( 20 )]
+[node name="Chest" parent="YSort/Structures/StoneMason" instance=ExtResource( 20 )]
 position = Vector2( 151, -2 )
+
+[node name="Farmer" type="YSort" parent="YSort/Structures"]
+
+[node name="Chest" parent="YSort/Structures/Farmer" instance=ExtResource( 20 )]
+position = Vector2( 22, -11 )
+class_type = "Farmer"
+
+[node name="CarrotFarm" parent="YSort/Structures/Farmer" instance=ExtResource( 16 )]
+position = Vector2( 51, -10 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

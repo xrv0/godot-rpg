@@ -9,6 +9,16 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "StaticBody2D",
+"class": "Farm",
+"language": "GDScript",
+"path": "res://World/CarrotFarm.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "Farmer",
+"language": "GDScript",
+"path": "res://Player/Farmer.gd"
+}, {
 "base": "Control",
 "class": "InteractionComponentUI",
 "language": "GDScript",
@@ -40,6 +50,8 @@ _global_script_classes=[ {
 "path": "res://World/Tree.gd"
 } ]
 _global_script_class_icons={
+"Farm": "",
+"Farmer": "",
 "InteractionComponentUI": "",
 "Lumberjack": "",
 "Player": "",
