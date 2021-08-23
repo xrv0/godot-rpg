@@ -19,7 +19,7 @@
 [ext_resource path="res://UI/ItemsUI/FarmedItemList.tscn" type="PackedScene" id=17]
 [ext_resource path="res://World/Stone.tscn" type="PackedScene" id=18]
 [ext_resource path="res://World/StoneCuter.tscn" type="PackedScene" id=19]
-[ext_resource path="res://World/Buildings/StoneChest.tscn" type="PackedScene" id=20]
+[ext_resource path="res://World/Buildings/Chest.tscn" type="PackedScene" id=20]
 
 [sub_resource type="TileSet" id=1]
 0/name = "DirtTileset.png 0"
